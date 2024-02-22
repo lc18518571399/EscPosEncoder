@@ -1,12 +1,21 @@
 {
   "name": "@mineminemine/esc-pos-encoder-ionic",
-  "version": "2.0.3",
+  "version": "3.0.0",
   "description": "Create a set of commands that can be send to any receipt printer that supports ESC/POS",
-  "main": "src/esc-pos-encoder.js",
+  "type": "module",
+  "exports": {
+    "browser": {
+      "import": "./dist/esc-pos-encoder.esm.js",
+      "require": "./dist/esc-pos-encoder.umd.js",
+      "script": "./dist/esc-pos-encoder.umd.js"
+    },
+    "import": "./dist/esc-pos-encoder.mjs",
+    "require": "./dist/esc-pos-encoder.cjs"
+  },
+  "main": "dist/esc-pos-encoder.cjs",
+  "module": "dist/esc-pos-encoder.mjs",
   "scripts": {
-    "bundle": "browserify src/esc-pos-encoder.js --standalone EscPosEncoder -o dist/esc-pos-encoder.js",
-    "uglify": "uglifyjs dist/esc-pos-encoder.js -cm --overwrite -o dist/esc-pos-encoder.js",
-    "build": "npm run bundle && npm run uglify",
+    "build": "rollup -c",
     "lint": "eslint --fix src/esc-pos-encoder.js",
     "mocha": "mocha test/",
     "test": "npm run lint && npm run mocha"
@@ -23,7 +32,8 @@
     "ionic",
     "ionic4",
     "ionic5",
-    "ionic6"
+    "ionic6",
+    "ionic7"
   ],
   "author": "Ryan Huxley",
   "license": "MIT",
@@ -32,23 +42,23 @@
   },
   "homepage": "https://github.com/mineminemine/EscPosEncoder#readme",
   "devDependencies": {
-    "browserify": "^17.0.0",
-    "buffer-to-uint8array": "^1.1.0",
-    "chai": "^4.3.4",
-    "eslint": "^7.31.0",
+    "@rollup/plugin-commonjs": "^24.1.0",
+    "@rollup/plugin-node-resolve": "^15.0.2",
+    "@rollup/plugin-terser": "^0.4.1",
+    "chai": "^4.3.7",
+    "eslint": "^8.39.0",
     "eslint-config-google": "^0.14.0",
-    "iconv-lite": "^0.6.3",
-    "mocha": "^9.0.2",
-    "uglify-es": "^3.3.9"
+    "mocha": "^10.2.0",
+    "rollup": "^3.20.7"
   },
   "dependencies": {
-    "canvas": "^2.8.0",
+    "canvas": "^2.11.2",
     "canvas-dither": "^1.0.1",
     "canvas-flatten": "^1.0.1",
-    "codepage-encoder": "^1.0.0",
+    "codepage-encoder": "^2.0.4",
     "linewrap": "^0.2.1"
   },
-  "directories": {
-    "test": "test"
-  }
+  "files": [
+    "dist"
+  ]
 }
