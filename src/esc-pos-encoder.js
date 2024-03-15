@@ -1,5 +1,5 @@
 import linewrap from 'linewrap';
-import {createCanvas} from 'canvas';
+import { createCanvas } from 'canvas';
 import Dither from 'canvas-dither';
 import Flatten from 'canvas-flatten';
 import CodepageEncoder from 'codepage-encoder';
@@ -314,7 +314,7 @@ class EscPosEncoder {
   _wrap(value, position) {
     if (position || (this._options.wordWrap && this._options.width)) {
       const indent = '-'.repeat(this._cursor);
-      const w = linewrap(position || this._options.width, {lineBreak: '\n', whitespace: 'all'});
+      const w = linewrap(position || this._options.width, { lineBreak: '\n', whitespace: 'all' });
       const result = w(indent + value).substring(this._cursor).split('\n');
 
       return result;
@@ -487,7 +487,7 @@ class EscPosEncoder {
      */
   underline(value) {
     if (typeof value === 'undefined') {
-      value = ! this._state.underline;
+      value = !this._state.underline;
     }
 
     this._state.underline = value;
@@ -508,7 +508,7 @@ class EscPosEncoder {
      */
   italic(value) {
     if (typeof value === 'undefined') {
-      value = ! this._state.italic;
+      value = !this._state.italic;
     }
 
     this._state.italic = value;
@@ -529,7 +529,7 @@ class EscPosEncoder {
      */
   bold(value) {
     if (typeof value === 'undefined') {
-      value = ! this._state.bold;
+      value = !this._state.bold;
     }
 
     this._state.bold = value;
@@ -608,7 +608,7 @@ class EscPosEncoder {
      */
   invert(value) {
     if (typeof value === 'undefined') {
-      value = ! this._state.invert;
+      value = !this._state.invert;
     }
 
     this._state.invert = value;
@@ -694,7 +694,7 @@ class EscPosEncoder {
         const cell = [];
 
         if (typeof data[r][c] === 'string') {
-          const w = linewrap(columns[c].width, {lineBreak: '\n'});
+          const w = linewrap(columns[c].width, { lineBreak: '\n' });
           const fragments = w(data[r][c]).split('\n');
 
           for (let f = 0; f < fragments.length; f++) {
@@ -865,7 +865,7 @@ class EscPosEncoder {
     const cell = [];
 
     if (typeof contents === 'string') {
-      const w = linewrap(options.width - 2 - options.paddingLeft - options.paddingRight, {lineBreak: '\n'});
+      const w = linewrap(options.width - 2 - options.paddingLeft - options.paddingRight, { lineBreak: '\n' });
       const fragments = w(contents).split('\n');
 
       for (let f = 0; f < fragments.length; f++) {
@@ -959,7 +959,7 @@ class EscPosEncoder {
      * @return {object}                  Return the object, for easy chaining commands
      *
      */
-  barcode(value, symbology, height) {
+  async barcode(value, symbology, height) {
     if (this._embedded) {
       throw new Error('Barcodes are not supported in table cells or boxes');
     }
@@ -1040,7 +1040,7 @@ class EscPosEncoder {
      * @return {object}                  Return the object, for easy chaining commands
      *
      */
-  qrcode(value, model, size, errorlevel) {
+  async qrcode(value, model, size, errorlevel) {
     if (this._embedded) {
       throw new Error('QR codes are not supported in table cells or boxes');
     }
@@ -1140,7 +1140,7 @@ class EscPosEncoder {
      * @return {object}                  Return the object, for easy chaining commands
      *
      */
-  image(element, width, height, algorithm, threshold) {
+  async image(element, width, height, algorithm, threshold) {
     if (this._embedded) {
       throw new Error('Images are not supported in table cells or boxes');
     }
