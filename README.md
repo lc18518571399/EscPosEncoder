@@ -18,7 +18,7 @@ If you prefer ES6 modules, then import `EscPosEncoder` from `esc-pos-encoder` an
 
     let encoder = new EscPosEncoder();
 
-    let result = encoder
+    let result =await encoder
         .initialize()
         .text('The quick brown fox jumps over the lazy dog')
         .newline()
@@ -452,13 +452,13 @@ In general the printer will automatically calculate the checksum if one is not p
 
 For example with the checksum provided in the data:
 
-    let result = encoder
+    let result =await encoder
         .barcode('3130630574613', 'ean13', 60)
         .encode()
 
 Or without a checksum:
 
-    let result = encoder
+    let result =await encoder
         .barcode('313063057461', 'ean13', 60)
         .encode()
 
@@ -483,19 +483,19 @@ By default Code 128 uses CODE B. It is possible to use a different code set, by 
 
 For example with the default CODE B set:
 
-    let result = encoder
+    let result =await encoder
         .barcode('CODE128 test', 'code128', 60)
         .encode()
 
 Is equivalent to manually selecting CODE B:
 
-    let result = encoder
+    let result =await encoder
         .barcode('{B' + 'CODE128 test', 'code128', 60)
         .encode()
 
 And Code C only supports numbers, but you must encode it as a string:
 
-    let result = encoder
+    let result =await encoder
         .barcode('{C' + '2Uc#', 'code128', 60)
         .encode()
 
@@ -509,7 +509,7 @@ All of the other symbologies require even more complicated encoding specified in
 
 Print a QR code. The first parameter is the data of the QR code.
 
-    let result = encoder
+    let result =await encoder
         .qrcode('https://nielsleenheer.com')
         .encode()
 
@@ -521,7 +521,7 @@ The qrcode function accepts the following additional parameters:
 
 For example:
 
-    let result = encoder
+    let result =await encoder
         .qrcode('https://nielsleenheer.com', 1, 8, 'h')
         .encode()
 
@@ -543,7 +543,7 @@ The fifth paramter is the threshold that will be used by the threshold and bayer
     img.src = 'https://...';
 
     img.onload = function() {
-        let result = encoder
+        let result =await encoder
             .image(img, 320, 320, 'atkinson')
             .encode()
     }
